@@ -5,8 +5,8 @@ import { resolve } from 'path';
 export default defineConfig({
   root: 'extension',
   build: {
-    // Explicitly resolve output directory to the extension/dist folder
-    outDir: '../extension/dist',
+    // Output to the dist folder inside the extension directory
+    outDir: 'dist',
     emptyOutDir: true,
     rollupOptions: {
       input: {
