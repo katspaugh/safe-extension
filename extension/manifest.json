@@ -4,13 +4,13 @@
   "version": "0.1.0",
   "description": "An example cross-browser extension.",
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "dist/popup.html"
   },
   "icons": {
     "48": "icon.png"
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "dist/background.js"
   },
   "permissions": []
 }
