@@ -1,0 +1,38 @@
+{
+  "name": "safe-extension",
+  "version": "1.0.0",
+  "description": "This repository contains a minimal cross–browser browser extension. The main UI is a popup sized **393×852** pixels. A simple promise-based polyfill is bundled so the code can use the `browser` namespace in both Chrome and Firefox.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint \"extension/src/**/*.{ts,tsx}\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "@babel/preset-react": "^7.27.1",
+    "@types/chrome": "^0.1.1",
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19.1.7",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "eslint": "8.57",
+    "eslint-plugin-react": "^7.37.5",
+    "typescript": "5.8",
+    "vite": "^7.0.6"
+  },
+  "dependencies": {
+    "@tamagui/babel-plugin": "^1.132.15",
+    "@tamagui/core": "^1.132.15",
+    "@tamagui/web": "^1.132.15",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "tamagui": "^1.132.15"
+  }
+}
