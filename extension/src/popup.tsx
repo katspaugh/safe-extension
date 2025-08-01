@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { TamaguiProvider, Theme } from 'tamagui'
 import tamaguiConfig from './tamagui.config'
@@ -13,11 +13,11 @@ const App = () => (
     <TamaguiProvider config={tamaguiConfig}>
       <Theme name="light">
         <Suspense fallback={<div>Loading...</div>}>
-          <BrowserRouter>
+          <MemoryRouter>
             <Routes>
               <Route path="/" element={<Home />} />
             </Routes>
-          </BrowserRouter>
+          </MemoryRouter>
         </Suspense>
       </Theme>
     </TamaguiProvider>
