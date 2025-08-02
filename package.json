@@ -42,5 +42,6 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.7.1",
     "tamagui": "^1.132.15"
-  }
+  },
+  "packageManager": "yarn@4.9.2"
 }
