@@ -67,7 +67,6 @@ export const tokens = createTokens({
   size: {
     $1: 4,
     $2: 8,
-    true: 8,
     $3: 12,
     $4: 16,
     $5: 20,
@@ -76,6 +75,8 @@ export const tokens = createTokens({
     $8: 32,
     $9: 36,
     $10: 40,
+    $11: 44,
+    true: 44,
     $xl: 14,
     $md: 14,
     $sm: 14,
