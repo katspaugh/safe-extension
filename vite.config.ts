@@ -4,6 +4,8 @@ import { resolve } from 'path';
 
 export default defineConfig({
   root: 'extension',
+  // Use relative paths so the extension can load files from the dist folder
+  base: './',
   build: {
     // Output to the dist folder inside the extension directory
     outDir: 'dist',
