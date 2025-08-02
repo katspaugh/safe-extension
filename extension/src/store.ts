@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { cgwClient, setBaseUrl } from '@safe-global/store'
+import { cgwClient, setBaseUrl } from '@safe-global/store/src'
 
 setBaseUrl('https://safe-client.safe.global')
 

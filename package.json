@@ -31,8 +31,11 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
     "@safe-global/store": "github:safe-global/safe-wallet-monorepo#branch=dev&workspace=@safe-global/store",
+    "@tamagui/animations-css": "^1.132.15",
     "@tamagui/babel-plugin": "^1.132.15",
     "@tamagui/core": "^1.132.15",
+    "@tamagui/font-dm-sans": "^1.132.15",
+    "@tamagui/themes": "^1.132.15",
     "@tamagui/web": "^1.132.15",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
