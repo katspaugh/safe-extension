@@ -1,19 +1,13 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
+import { cgwClient, setBaseUrl } from '@safe-global/store'
 
-const counterSlice = createSlice({
-  name: 'counter',
-  initialState: 0,
-  reducers: {
-    increment: (state) => state + 1
-  }
-})
-
-export const { increment } = counterSlice.actions
+setBaseUrl('https://safe-client.safe.global')
 
 const store = configureStore({
   reducer: {
-    counter: counterSlice.reducer
-  }
+    [cgwClient.reducerPath]: cgwClient.reducer,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cgwClient.middleware),
 })
 
 export type RootState = ReturnType<typeof store.getState>
