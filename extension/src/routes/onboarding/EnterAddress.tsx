@@ -2,11 +2,13 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Stack, Label, Input, XStack, Paragraph, Image } from 'tamagui'
 import { apiSliceWithChainsConfig, chainsAdapter } from '@safe-global/store/src/gateway/chains'
 import { useLazySafesGetOverviewForManyQuery } from '@safe-global/store/src/gateway/safes'
+import { useLazyOwnersGetAllSafesByOwnerV2Query } from '@safe-global/store/src/gateway/AUTO_GENERATED/owners'
 
 export default function EnterAddress() {
   const [address, setAddress] = useState('')
   const { data: chainsState } = apiSliceWithChainsConfig.useGetChainsConfigQuery()
   const [fetchSafes, { data: safesData }] = useLazySafesGetOverviewForManyQuery()
+  const [fetchOwnerSafes, { data: ownerSafesData }] = useLazyOwnersGetAllSafesByOwnerV2Query()
 
   const chains = useMemo(
     () => (chainsState ? chainsAdapter.getSelectors().selectAll(chainsState) : []),
@@ -20,17 +22,36 @@ export default function EnterAddress() {
     }
   }, [address, chains, fetchSafes])
 
+  useEffect(() => {
+    if (safesData && safesData.length === 0) {
+      fetchOwnerSafes({ ownerAddress: address })
+    }
+  }, [safesData, address, fetchOwnerSafes])
+
   const groupedSafes = useMemo(() => {
-    if (!safesData) return {}
-    return safesData.reduce((acc, safe) => {
-      const safeAddress = safe.address.value
-      if (!acc[safeAddress]) {
-        acc[safeAddress] = []
-      }
-      acc[safeAddress].push(safe.chainId)
+    if (safesData && safesData.length > 0) {
+      return safesData.reduce((acc, safe) => {
+        const safeAddress = safe.address.value
+        if (!acc[safeAddress]) {
+          acc[safeAddress] = []
+        }
+        acc[safeAddress].push(safe.chainId)
+        return acc
+      }, {} as Record<string, string[]>)
+    }
+
+    if (!ownerSafesData) return {}
+
+    return Object.entries(ownerSafesData).reduce((acc, [chainId, safes]) => {
+      safes.forEach((safeAddress) => {
+        if (!acc[safeAddress]) {
+          acc[safeAddress] = []
+        }
+        acc[safeAddress].push(chainId)
+      })
       return acc
     }, {} as Record<string, string[]>)
-  }, [safesData])
+  }, [safesData, ownerSafesData])
 
   return (
     <Stack
