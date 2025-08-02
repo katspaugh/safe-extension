@@ -28,7 +28,29 @@ export default function EnterAddress() {
     }
   }, [safesData, address, fetchOwnerSafes])
 
+  useEffect(() => {
+    if (!ownerSafesData) return
+
+    const safesList = Object.entries(ownerSafesData).flatMap(([chainId, safes]) =>
+      safes.map((safeAddress) => `${chainId}:${safeAddress}`),
+    )
+
+    fetchSafes({ safes: safesList, currency: 'usd' })
+  }, [ownerSafesData, fetchSafes])
+
   const groupedSafes = useMemo(() => {
+    if (ownerSafesData) {
+      return Object.entries(ownerSafesData).reduce((acc, [chainId, safes]) => {
+        safes.forEach((safeAddress) => {
+          if (!acc[safeAddress]) {
+            acc[safeAddress] = []
+          }
+          acc[safeAddress].push(chainId)
+        })
+        return acc
+      }, {} as Record<string, string[]>)
+    }
+
     if (safesData && safesData.length > 0) {
       return safesData.reduce((acc, safe) => {
         const safeAddress = safe.address.value
@@ -40,17 +62,7 @@ export default function EnterAddress() {
       }, {} as Record<string, string[]>)
     }
 
-    if (!ownerSafesData) return {}
-
-    return Object.entries(ownerSafesData).reduce((acc, [chainId, safes]) => {
-      safes.forEach((safeAddress) => {
-        if (!acc[safeAddress]) {
-          acc[safeAddress] = []
-        }
-        acc[safeAddress].push(chainId)
-      })
-      return acc
-    }, {} as Record<string, string[]>)
+    return {}
   }, [safesData, ownerSafesData])
 
   return (
@@ -72,17 +84,27 @@ export default function EnterAddress() {
         title="Please enter a valid Ethereum address (42 characters starting with 0x)."
         value={address}
         onChange={(e) => setAddress(e.target.value)}
+        width="100%"
       />
       {Object.entries(groupedSafes).map(([safeAddress, chainIds]) => (
-        <XStack key={safeAddress} alignItems="center" gap="$2">
+        <Stack key={safeAddress} display="grid" gridTemplateRows="auto auto" gap="$1">
           <Paragraph>{safeAddress}</Paragraph>
-          {chainIds.map((id) => {
-            const chain = chains.find((c) => c.chainId === id)
-            return chain?.chainLogoUri ? (
-              <Image key={id} src={chain.chainLogoUri} width={16} height={16} alt={chain.chainName} />
-            ) : null
-          })}
-        </XStack>
+          <XStack justifyContent="flex-end">
+            {chainIds.map((id, index) => {
+              const chain = chains.find((c) => c.chainId === id)
+              return chain?.chainLogoUri ? (
+                <Image
+                  key={id}
+                  src={chain.chainLogoUri}
+                  width={16}
+                  height={16}
+                  alt={chain.chainName}
+                  ml={index === 0 ? 0 : -8}
+                />
+              ) : null
+            })}
+          </XStack>
+        </Stack>
       ))}
     </Stack>
   )
