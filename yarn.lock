@@ -1961,7 +1961,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tamagui/animations-css@npm:1.132.15":
+"@tamagui/animations-css@npm:1.132.15, @tamagui/animations-css@npm:^1.132.15":
   version: 1.132.15
   resolution: "@tamagui/animations-css@npm:1.132.15"
   dependencies:
@@ -2143,6 +2143,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tamagui/colors@npm:1.132.15":
+  version: 1.132.15
+  resolution: "@tamagui/colors@npm:1.132.15"
+  checksum: 10c0/62bc4e7d4a2146442cb8fed4100075f43b6e947630cf1ef46e8a55be1fc6e162be13d2d6dc75ca4f4afe446356d46cde25a734db0fb901a3a4aa631912ef1ce4
+  languageName: node
+  linkType: hard
+
 "@tamagui/compose-refs@npm:1.132.15":
   version: 1.132.15
   resolution: "@tamagui/compose-refs@npm:1.132.15"
@@ -2318,6 +2325,15 @@ __metadata:
   peerDependencies:
     react: "*"
   checksum: 10c0/4f7554ef1dfb9e28ace34380ccb7cca999a2cdc5383befe16ecf9a22edc955071143f5dee1b532cc258e0177646742e1d746341f6c79962165ce84f18e933284
+  languageName: node
+  linkType: hard
+
+"@tamagui/font-dm-sans@npm:^1.132.15":
+  version: 1.132.15
+  resolution: "@tamagui/font-dm-sans@npm:1.132.15"
+  dependencies:
+    "@tamagui/core": "npm:1.132.15"
+  checksum: 10c0/435d8d877378a6456c77d9da5c97bc045ff4260dc11e2e1441c9219f928b031cc56e9bc8734d76829441a05c1d8713617a74d0e4902e89e330b27b8c56c359aa
   languageName: node
   linkType: hard
 
@@ -3064,6 +3080,19 @@ __metadata:
   peerDependencies:
     react: "*"
   checksum: 10c0/10354ae07aa630e30572faa74fbf2a46d992f945bdebcbf3651f8cb6a8486bc48c317bb2bffd67641908c981df1201c7fde4b3f3b17dce9001008999bf619d17
+  languageName: node
+  linkType: hard
+
+"@tamagui/themes@npm:^1.132.15":
+  version: 1.132.15
+  resolution: "@tamagui/themes@npm:1.132.15"
+  dependencies:
+    "@tamagui/colors": "npm:1.132.15"
+    "@tamagui/create-theme": "npm:1.132.15"
+    "@tamagui/theme-builder": "npm:1.132.15"
+    "@tamagui/web": "npm:1.132.15"
+    color2k: "npm:^2.0.2"
+  checksum: 10c0/b4472e33765b4c6d76b6429d888b94316eaa3e4d5d0ee181dcd29cd494a6e14d0280100eec5937ca7f8fabe9a5595fc5249ebf453f7affc8a63d8a5d3ab5bfef
   languageName: node
   linkType: hard
 
@@ -6909,8 +6938,11 @@ __metadata:
     "@babel/preset-react": "npm:^7.27.1"
     "@reduxjs/toolkit": "npm:^2.8.2"
     "@safe-global/store": "github:safe-global/safe-wallet-monorepo#branch=dev&workspace=@safe-global/store"
+    "@tamagui/animations-css": "npm:^1.132.15"
     "@tamagui/babel-plugin": "npm:^1.132.15"
     "@tamagui/core": "npm:^1.132.15"
+    "@tamagui/font-dm-sans": "npm:^1.132.15"
+    "@tamagui/themes": "npm:^1.132.15"
     "@tamagui/web": "npm:^1.132.15"
     "@types/chrome": "npm:^0.1.1"
     "@types/react": "npm:^19.1.9"
