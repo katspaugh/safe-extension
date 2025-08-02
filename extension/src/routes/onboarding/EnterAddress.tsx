@@ -8,12 +8,15 @@ export default function EnterAddress() {
   const { data: chainsState } = apiSliceWithChainsConfig.useGetChainsConfigQuery()
   const [fetchSafes, { data: safesData }] = useLazySafesGetOverviewForManyQuery()
 
-  const chains = chainsState ? chainsAdapter.getSelectors().selectAll(chainsState) : []
+  const chains = useMemo(
+    () => (chainsState ? chainsAdapter.getSelectors().selectAll(chainsState) : []),
+    [chainsState],
+  )
 
   useEffect(() => {
     if (/^0x[a-fA-F0-9]{40}$/.test(address) && chains.length > 0) {
       const safesParam = chains.map((chain) => `${chain.chainId}:${address}`)
-      fetchSafes({ safes: safesParam })
+      fetchSafes({ safes: safesParam, currency: 'usd' })
     }
   }, [address, chains, fetchSafes])
 
