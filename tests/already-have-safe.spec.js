@@ -85,3 +85,21 @@ test('detects Safe on two chains', async () => {
 
   await context.close()
 })
+
+test('lists Safes for a signer address', async () => {
+  const { context, page } = await launchExtension()
+
+  await page.getByRole('button', { name: 'Get started' }).click()
+  await page.getByRole('button', { name: 'Already have a Safe?' }).click()
+
+  const signer = '0x474e5Ded6b5D078163BFB8F6dBa355C3aA5478C8'
+  const input = page.getByLabel('Enter your Safe or signer address')
+  await input.fill(signer)
+
+  const safeAddress = '0xfE1DcF6cA7F39D9c5e86cE18a61276d36B490319'
+  const safeRow = page.locator(`text=${safeAddress}`).locator('..')
+  await expect(safeRow).toBeVisible()
+  await expect(safeRow.getByRole('img')).toHaveCount(2)
+
+  await context.close()
+})
