@@ -80,6 +80,7 @@ export const tokens = createTokens({
     $md: 14,
     $sm: 14,
   },
+  fontSize: fontSizes,
   zIndex,
   radius,
 })
