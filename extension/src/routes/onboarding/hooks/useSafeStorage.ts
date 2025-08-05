@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 const getStoredSafes = (): Promise<Record<string, string[]>> =>
   new Promise((resolve) => {
@@ -13,12 +13,19 @@ const setStoredSafes = (safes: Record<string, string[]>): Promise<void> =>
   })
 
 export const useSafeStorage = () => {
+  const [storedSafes, setStoredSafesState] = useState<Record<string, string[]>>({})
+
+  useEffect(() => {
+    getStoredSafes().then(setStoredSafesState)
+  }, [])
+
   const saveSafe = useCallback(async (safeAddress: string, chainIds: string[]) => {
     const stored = await getStoredSafes()
     stored[safeAddress] = Array.from(
       new Set([...(stored[safeAddress] || []), ...chainIds]),
     )
     await setStoredSafes(stored)
+    setStoredSafesState(stored)
   }, [])
 
   const saveAllSafes = useCallback(async (groupedSafes: Record<string, string[]>) => {
@@ -29,9 +36,10 @@ export const useSafeStorage = () => {
       )
     })
     await setStoredSafes(stored)
+    setStoredSafesState(stored)
   }, [])
 
-  return { saveSafe, saveAllSafes }
+  return { safes: storedSafes, saveSafe, saveAllSafes }
 }
 
 export type SaveSafe = (
