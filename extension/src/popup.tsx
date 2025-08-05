@@ -10,6 +10,7 @@ import store from './store'
 const Home = lazy(() => import('./routes/Home'))
 const OnboardingStart = lazy(() => import('./routes/onboarding/Start'))
 const OnboardingEnterAddress = lazy(() => import('./routes/onboarding/EnterAddress'))
+const Dashboard = lazy(() => import('./routes/Dashboard'))
 
 const App = () => (
   <Provider store={store}>
@@ -21,6 +22,7 @@ const App = () => (
               <Route path={RoutePaths.HOME} element={<Home />} />
               <Route path={RoutePaths.ONBOARDING_START} element={<OnboardingStart />} />
               <Route path={RoutePaths.ONBOARDING_ENTER_ADDRESS} element={<OnboardingEnterAddress />} />
+              <Route path={RoutePaths.DASHBOARD} element={<Dashboard />} />
             </Routes>
           </MemoryRouter>
         </Suspense>
