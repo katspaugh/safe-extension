@@ -43,7 +43,7 @@ export default function SafeItem({
             setIsSaved(true)
           }}
         >
-          {isSaved ? '✔️saved' : '+ Add'}
+          {isSaved ? 'Saved' : '+ Add'}
         </Button>
       </XStack>
     </Stack>
