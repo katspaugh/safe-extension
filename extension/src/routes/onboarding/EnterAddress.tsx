@@ -3,12 +3,11 @@ import { Stack, Label, Input, Button } from 'tamagui'
 import SafeList from './components/SafeList'
 import { useDetectedSafes } from './hooks/useDetectedSafes'
 import { useSafeStorage } from './hooks/useSafeStorage'
-import SavedSafesList from '../../components/SavedSafesList'
 
 export default function EnterAddress() {
   const [address, setAddress] = useState('')
   const { chains, groupedSafes, isSigner } = useDetectedSafes(address)
-  const { saveSafe, saveAllSafes, safes } = useSafeStorage()
+  const { saveSafe, saveAllSafes } = useSafeStorage()
 
   return (
     <Stack
@@ -32,7 +31,6 @@ export default function EnterAddress() {
         width="100%"
       />
       {isSigner && <Button onPress={() => {}}>Import this signer</Button>}
-      <SavedSafesList safes={safes} chains={chains} />
       <SafeList
         groupedSafes={groupedSafes}
         chains={chains}

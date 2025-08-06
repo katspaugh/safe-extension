@@ -12,6 +12,12 @@ export default function Dashboard() {
   const chainIds = safes[address] || []
   const [fetchSafes, { data: safesData }] = useLazySafesGetOverviewForManyQuery()
 
+  const formatFiatValue = (value: number) => {
+    const options: Intl.NumberFormatOptions = { notation: 'compact' }
+    options.maximumFractionDigits = value >= 1 ? 0 : 2
+    return new Intl.NumberFormat('en-US', options).format(value)
+  }
+
   useEffect(() => {
     if (address && chainIds.length > 0) {
       const safesParam = chainIds.map((id) => `${id}:${address}`)
@@ -35,7 +41,7 @@ export default function Dashboard() {
               />
             )}
             <Paragraph>
-              {chain?.chainName || safe.chainId}: {safe.threshold}/{safe.owners.length}, {safe.fiatTotal}$
+              {chain?.chainName || safe.chainId}: {safe.threshold}/{safe.owners.length}, {formatFiatValue(Number(safe.fiatTotal))}$
             </Paragraph>
           </XStack>
         )
