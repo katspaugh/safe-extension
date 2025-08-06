@@ -37,6 +37,7 @@ export default function SafeItem({
         </XStack>
         <Button
           ml="auto"
+          width={80}
           disabled={isSaved}
           onPress={async () => {
             await onAdd(safeAddress, chainIds)

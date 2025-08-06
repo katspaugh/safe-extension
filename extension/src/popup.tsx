@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { RoutePaths } from './routes/paths'
 import { Provider } from 'react-redux'
-import { TamaguiProvider, Theme } from 'tamagui'
+import { TamaguiProvider, Theme, Stack } from 'tamagui'
+import NavigationBar from './components/NavigationBar'
 import tamaguiConfig from './tamagui.config'
 import store from './store'
 
@@ -18,12 +19,15 @@ const App = () => (
       <Theme name="light">
         <Suspense fallback={<div>Loading...</div>}>
           <MemoryRouter>
-            <Routes>
-              <Route path={RoutePaths.HOME} element={<Home />} />
-              <Route path={RoutePaths.ONBOARDING_START} element={<OnboardingStart />} />
-              <Route path={RoutePaths.ONBOARDING_ENTER_ADDRESS} element={<OnboardingEnterAddress />} />
-              <Route path={RoutePaths.DASHBOARD} element={<Dashboard />} />
-            </Routes>
+            <Stack height="100%">
+              <NavigationBar />
+              <Routes>
+                <Route path={RoutePaths.HOME} element={<Home />} />
+                <Route path={RoutePaths.ONBOARDING_START} element={<OnboardingStart />} />
+                <Route path={RoutePaths.ONBOARDING_ENTER_ADDRESS} element={<OnboardingEnterAddress />} />
+                <Route path={RoutePaths.DASHBOARD} element={<Dashboard />} />
+              </Routes>
+            </Stack>
           </MemoryRouter>
         </Suspense>
       </Theme>
