@@ -1,15 +1,14 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import { Button, Paragraph, Image, XStack, Stack } from 'tamagui'
-import type { Chain } from '../routes/onboarding/hooks/useDetectedSafes'
+import type { Chain } from '../hooks/useDetectedSafes'
 
 interface Props {
   safes: Record<string, string[]>
   chains: Chain[]
+  onSelect: (safeAddress: string) => void
 }
 
-export default function SavedSafesList({ safes, chains }: Props) {
-  const navigate = useNavigate()
+export default function SavedSafesList({ safes, chains, onSelect }: Props) {
   const entries = Object.entries(safes)
   if (entries.length === 0) return null
   return (
@@ -17,7 +16,7 @@ export default function SavedSafesList({ safes, chains }: Props) {
       {entries.map(([safeAddress, chainIds]) => (
         <Button
           key={safeAddress}
-          onPress={() => navigate(`/dashboard/${safeAddress}`)}
+          onPress={() => onSelect(safeAddress)}
           justifyContent="flex-start"
         >
           <XStack alignItems="center" width="100%">

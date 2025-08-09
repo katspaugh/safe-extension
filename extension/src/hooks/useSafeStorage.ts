@@ -1,16 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-
-const getStoredSafes = (): Promise<Record<string, string[]>> =>
-  new Promise((resolve) => {
-    chrome.storage.local.get(['safes'], (result) => {
-      resolve((result.safes as Record<string, string[]>) || {})
-    })
-  })
-
-const setStoredSafes = (safes: Record<string, string[]>): Promise<void> =>
-  new Promise((resolve) => {
-    chrome.storage.local.set({ safes }, () => resolve())
-  })
+import { getStoredSafes, setStoredSafes } from '../services/safeStorage'
 
 export const useSafeStorage = () => {
   const [storedSafes, setStoredSafesState] = useState<Record<string, string[]>>({})

@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Stack, Paragraph, Image, XStack, Button } from 'tamagui'
-import type { Chain } from '../hooks/useDetectedSafes'
+import type { Chain } from '../../hooks/useDetectedSafes'
 
 interface Props {
   safeAddress: string
   chainIds: string[]
   chains: Chain[]
+  saved: boolean
   onAdd: (safeAddress: string, chainIds: string[]) => void
 }
 
@@ -13,9 +14,9 @@ export default function SafeItem({
   safeAddress,
   chainIds,
   chains,
+  saved,
   onAdd,
 }: Props) {
-  const [isSaved, setIsSaved] = useState(false)
   return (
     <Stack display="grid" gridTemplateRows="auto auto" gap="$1">
       <Paragraph>{safeAddress}</Paragraph>
@@ -38,13 +39,10 @@ export default function SafeItem({
         <Button
           ml="auto"
           width={80}
-          disabled={isSaved}
-          onPress={async () => {
-            await onAdd(safeAddress, chainIds)
-            setIsSaved(true)
-          }}
+          disabled={saved}
+          onPress={() => onAdd(safeAddress, chainIds)}
         >
-          {isSaved ? 'Saved' : '+ Add'}
+          {saved ? 'Saved' : '+ Add'}
         </Button>
       </XStack>
     </Stack>
