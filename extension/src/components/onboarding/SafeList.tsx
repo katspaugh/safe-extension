@@ -1,17 +1,18 @@
 import React from 'react'
 import { Button } from 'tamagui'
 import SafeItem from './SafeItem'
-import type { SaveSafe } from '../hooks/useSafeStorage'
-import type { Chain } from '../hooks/useDetectedSafes'
+import type { SaveSafe } from '../../hooks/useSafeStorage'
+import type { Chain } from '../../hooks/useDetectedSafes'
 
 interface Props {
   groupedSafes: Record<string, string[]>
   chains: Chain[]
+  savedSafes: Record<string, string[]>
   onAdd: SaveSafe
   onAddAll: () => void
 }
 
-export default function SafeList({ groupedSafes, chains, onAdd, onAddAll }: Props) {
+export default function SafeList({ groupedSafes, chains, savedSafes, onAdd, onAddAll }: Props) {
   const entries = Object.entries(groupedSafes)
   if (entries.length === 0) return null
 
@@ -23,6 +24,7 @@ export default function SafeList({ groupedSafes, chains, onAdd, onAddAll }: Prop
           safeAddress={safeAddress}
           chainIds={chainIds}
           chains={chains}
+          saved={!!savedSafes[safeAddress]}
           onAdd={onAdd}
         />
       ))}
